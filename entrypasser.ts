@@ -26,7 +26,7 @@ export class EntryPasser
     * @public
     * @description     Remote URI for sending data to
     */
-   private baseURI: string  = "http://newtestr-env.us-west-2.elasticbeanstalk.com/botaniClash/create_entry.php"; //this url has to be replaced with the botaniClash server url
+   private baseURI: string  = "http://newtestr-env.us-west-2.elasticbeanstalk.com/create_entry.php"; //this url has to be replaced with the botaniClash server url
     constructor(public http: Http, public toastCtrl  : ToastController)
     { 
 
@@ -39,7 +39,7 @@ export class EntryPasser
     * @public
     * @return {None}
     */
-   createEntryEvergreen(user: number, tree : number, type: string, time: string, breaking: number, young: number, pollen: number, open: number, release: number, unripe: number, ripe: number, recent: number ) : void
+   /*createEntryEvergreen(user: number, tree : number, type: string, time: string, breaking: number, young: number, pollen: number, open: number, release: number, unripe: number, ripe: number, recent: number ) : void
    {
       let headers 	: any		= new HttpHeaders({ 'Content-Type': 'application/json' }),
           options 	: any		= { "user": user, "tree" : tree, "type": type, "time": time, "breaking": breaking, "young": young, "pollen": pollen, "open": open, "release": release, "unripe": unripe, "ripe": ripe, "recent": recent},
@@ -56,7 +56,43 @@ export class EntryPasser
       {
          this.sendNotification('Something went wrong!');
       });
-   }
+   }*/
+   createEntry(user: number, tree : number, time: string, openPollenConesValue: number,unfoldingLeavesValue: number, fullSizedLeavesValue: number, coloredLeavesValue: number, openedFlowersValue: number, ripeFruitsValue: number, breakingNeedleBudsValue: number, youngNeedlesValue: number, freshPollenConesValue: number, unripeSeedConesValue: number, ripeSeedConesValue: number, droppedSeedConesValue: number, breakingLeafBudsValue: number, flowerBudsValue: number, fruitsValue: number, droppedFruitsValue: number, openPollenConesRadioValue:string, coloredLeavesRadioValue:string ) : void
+   {
+      let headers 	: any		= new HttpHeaders({ 'Content-Type': 'application/json' }),
+          options 	: any		= { "user": user, "tree" : tree,  "time": time, "openPollenConesValue": openPollenConesValue,"unfoldingLeavesValue": unfoldingLeavesValue, "fullSizedLeavesValue": fullSizedLeavesValue, "coloredLeavesValue": coloredLeavesValue, "openedFlowersValue":openedFlowersValue, "ripeFruitsValue": ripeFruitsValue, "breakingNeedleBudsValue": breakingLeafBudsValue, "youngNeedlesValue": youngNeedlesValue, "freshPollenConesValue": freshPollenConesValue, "unripeSeedConesValue": unripeSeedConesValue, "ripeSeedConesValue": ripeSeedConesValue, "droppedSeedConesValue": droppedSeedConesValue, "breakingLeafBudsValue": breakingLeafBudsValue, "flowerBudsValue": flowerBudsValue, "fruitsValue": fruitsValue, "droppedFruitsValue": droppedFruitsValue, "openPollenConesRadioValue": openPollenConesRadioValue, "coloredLeavesRadioValue":coloredLeavesRadioValue},
+          url       : any      	= "http://localhost/create_entry.php"; //this.baseURI;
+
+      this.http.post(url, JSON.stringify(options), headers)
+      .subscribe((data : any) =>
+      {
+        console.log(data);
+         // If the request was successful notify the user
+         this.sendNotification('Congratulations the information you provided was successfully recorded');
+      },
+      (error : any) =>
+      {
+          console.log(error);
+         this.sendNotification('Something went wrong!');
+      });
+    }
+      /*openPollenConesValue: number = 50;
+  unfoldingLeavesValue: number = 50;
+  fullSizedLeavesValue: number = 50;
+  coloredLeavesValue: number = 50;
+  openedFlowersValue: number = 50;
+  ripeFruitsValue: number = 50;
+
+  breakingNeedleBudsValue: number = 3;
+  youngNeedlesValue: number = 3;
+  freshPollenConesValue: number = 3;
+  unripeSeedConesValue: number = 3;
+  ripeSeedConesValue: number = 3;
+  droppedSeedConesValue: number = 3;
+  breakingLeafBudsValue: number = 3;
+  flowerBudsValue: number = 3;
+  fruitsValue: number = 3;
+  droppedFruitsValue: number = 3;*/
 
    /**
     * Save a new entry for a non Evergreen tree that has been added from dataCollection form
@@ -65,7 +101,7 @@ export class EntryPasser
     * @public
     * @return {None}
     */
-   createEntryNonEvergreen(user: number, tree : number, type: string, time: string, buds: number, unfolding: number, full: number,  color: number, falling: number, flowers: number, openFlowers: number, fruit: number, ripeFruit: number, recentFruit: number) : void
+  /* createEntryNonEvergreen(user: number, tree : number, type: string, time: string, buds: number, unfolding: number, full: number,  color: number, falling: number, flowers: number, openFlowers: number, fruit: number, ripeFruit: number, recentFruit: number) : void
    {
       let headers 	: any		= new HttpHeaders({ 'Content-Type': 'application/json' }),
           options 	: any		= { "user": user, "tree" : tree, "type": type, "time": time, "buds": buds, "unfolding": unfolding, "full": full,  "color": color, "falling": falling, "flowers": flowers, "openFlowers": openFlowers, "fruit":fruit, "ripeFruit": ripeFruit, "recentFruit": recentFruit },
@@ -82,7 +118,7 @@ export class EntryPasser
       {
          this.sendNotification('Something went wrong!');
       });
-   }
+   }*/
    
     /**
     * Manage notifying the user of the outcome of remote operations
